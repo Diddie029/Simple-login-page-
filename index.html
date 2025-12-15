@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Streaming - Login & Signup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated background with particles -->
+    <div class="background">
+        <div class="stars"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+        <canvas id="particleCanvas"></canvas>
+    </div>
+
+    <!-- Character Avatar -->
+    <div class="character-avatar" id="characterAvatar">
+        <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+            <!-- Head -->
+            <circle cx="50" cy="35" r="20" fill="#fdbcb4"/>
+            <!-- Eyes -->
+            <ellipse cx="43" cy="32" rx="4" ry="6" fill="#1a1a1a"/>
+            <ellipse cx="57" cy="32" rx="4" ry="6" fill="#1a1a1a"/>
+            <!-- Eye shine -->
+            <circle cx="44" cy="31" r="1.5" fill="white"/>
+            <circle cx="58" cy="31" r="1.5" fill="white"/>
+            <!-- Mouth -->
+            <path d="M 50 40 Q 45 42 42 40" stroke="#ff6b9d" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Hair -->
+            <path d="M 30 25 Q 25 15 35 10 Q 50 5 65 10 Q 75 15 70 25" fill="#00d4ff" opacity="0.8"/>
+            <!-- Body -->
+            <rect x="40" y="55" width="20" height="25" rx="5" fill="#a000ff" opacity="0.7"/>
+            <!-- Arms -->
+            <line x1="40" y1="60" x2="25" y2="75" stroke="#fdbcb4" stroke-width="3" stroke-linecap="round"/>
+            <line x1="60" y1="60" x2="75" y2="75" stroke="#fdbcb4" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+    </div>
+
+    <!-- Main container -->
+    <div class="container">
+        <!-- Login Form -->
+        <div class="form-container login-container active" id="loginForm">
+            <div class="form-wrapper">
+                <div class="character-greeting">Welcome back, Anime Hero!</div>
+                <h1 class="form-title">Anime <span class="glow-text">Nexus</span></h1>
+                <p class="form-subtitle">✨ Join your favorite anime world ✨</p>
+
+                <form class="form" id="loginFormElement">
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            class="form-input" 
+                            id="loginEmail" 
+                            placeholder="Email"
+                            required
+                        >
+                        <label class="floating-label">Email Address</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="password" 
+                            class="form-input" 
+                            id="loginPassword" 
+                            placeholder="Password"
+                            required
+                        >
+                        <label class="floating-label">Password</label>
+                    </div>
+
+                    <div class="error-message" id="loginError"></div>
+
+                    <button type="submit" class="btn btn-primary" id="loginBtn">
+                        <span class="btn-text">Login</span>
+                        <span class="btn-glow"></span>
+                    </button>
+                </form>
+
+                <p class="form-footer">
+                    Don't have an account? 
+                    <a href="#" class="toggle-form" data-form="signup">Join Now</a>
+                </p>
+
+                <p class="credentials-hint">🎭 Demo: trial@gmail.com / trial@1234</p>
+                <p class="character-quote" id="loginQuote">"Believe in yourself!"</p>
+            </div>
+        </div>
+
+        <!-- Signup Form -->
+        <div class="form-container signup-container" id="signupForm">
+            <div class="form-wrapper">
+                <div class="character-greeting">New character unlocked!</div>
+                <h1 class="form-title">Join <span class="glow-text">Anime Nexus</span></h1>
+                <p class="form-subtitle">✨ Create your legendary account ✨</p>
+
+                <form class="form" id="signupFormElement">
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="signupUsername" 
+                            placeholder="Username"
+                            required
+                        >
+                        <label class="floating-label">Username</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            class="form-input" 
+                            id="signupEmail" 
+                            placeholder="Email"
+                            required
+                        >
+                        <label class="floating-label">Email Address</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="password" 
+                            class="form-input" 
+                            id="signupPassword" 
+                            placeholder="Password"
+                            required
+                        >
+                        <label class="floating-label">Password (min. 6 chars)</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="password" 
+                            class="form-input" 
+                            id="signupConfirm" 
+                            placeholder="Confirm Password"
+                            required
+                        >
+                        <label class="floating-label">Confirm Password</label>
+                    </div>
+
+                    <div class="error-message" id="signupError"></div>
+
+                    <button type="submit" class="btn btn-primary" id="signupBtn">
+                        <span class="btn-text">Create Account</span>
+                        <span class="btn-glow"></span>
+                    </button>
+                </form>
+
+                <p class="form-footer">
+                    Already have an account? 
+                    <a href="#" class="toggle-form" data-form="login">Login</a>
+                </p>
+                <p class="character-quote" id="signupQuote">"Your adventure starts here!"</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="character-celebration">
+                <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Head -->
+                    <circle cx="50" cy="35" r="20" fill="#fdbcb4"/>
+                    <!-- Eyes (happy) -->
+                    <path d="M 40 30 Q 43 35 46 30" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <path d="M 54 30 Q 57 35 60 30" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <!-- Big smile -->
+                    <path d="M 42 40 Q 50 46 58 40" stroke="#ff6b9d" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <!-- Hair -->
+                    <path d="M 30 25 Q 25 15 35 10 Q 50 5 65 10 Q 75 15 70 25" fill="#00d4ff" opacity="0.8"/>
+                    <!-- Victory pose -->
+                    <rect x="40" y="55" width="20" height="25" rx="5" fill="#a000ff" opacity="0.7"/>
+                    <path d="M 35 65 L 20 50" stroke="#fdbcb4" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M 65 65 L 80 50" stroke="#fdbcb4" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <h2>🎉 Login Successful! 🎉</h2>
+            <p id="characterMessage">You unlocked the premium content!</p>
+            <p class="redirect-timer">Redirecting in <span id="redirectCount">3</span>s...</p>
+        </div>
+    </div>
+
+    <!-- Confetti and celebration effects -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
